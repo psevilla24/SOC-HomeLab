@@ -33,7 +33,8 @@ Go to Powershell and type Get-Filehash  plus file name to ensure file integrity
 ![Screenshot 2024-02-07 at 1 29 22 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/14a9e399-f3c9-4b65-be5f-8416482b1fb6)
 ![Screenshot 2024-02-07 at 1 30 39 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/048c81a1-d55d-4ded-8736-b010b76332c4)
 
-Spin up Virtualbox and click new then Follow the prompt, I will keep it as default.
+Spin up Virtualbox and click new then Follow the prompt,Name the the VM, pick a storage to store files and find the iso file for security onion and
+I will keep the insallation as default.
 
 ![Screenshot 2024-02-02 at 7 38 25 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/ff3dc19b-8983-463f-b2a4-a8711a839b22)
 
@@ -41,6 +42,77 @@ I will configure Security Onion to 16 gigs of RAM, 2 CPU, and 200 gigs of storag
 
 ![Screenshot 2024-02-02 at 7 39 45 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/19aae1c6-1e7a-4a14-95d7-cf85f5f4c7cf)
 ![Screenshot 2024-02-02 at 7 42 30 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/14b65b34-62ef-4b81-a650-050b2c49f2e2)
+
+Security onion will start and we will be presented with this options, Click yes to proceed.
+
+![Screenshot 2024-02-02 at 7 43 20 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/6a969ee9-f65e-47f4-962e-c823890fc5f9)
+
+Add Username and Password for Security Onion
+
+![Screenshot 2024-02-02 at 7 44 31 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/ec2a25f3-dda8-4b06-8178-b5781b026e5a)
+
+Installation completed please reboot, Now we need to sign in with the credentials that we made for Security Onion 
+
+![Screenshot 2024-02-02 at 7 46 16 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/794ccfb3-329f-434f-b076-1e13c1ce8437)
+
+Welcome page of Security onion will be presented, click yes to proceed
+
+![Screenshot 2024-02-02 at 7 50 56 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/ad70dedd-acad-4efc-9033-a403896438fe)
+
+Security Onion set up option, we will do standard installation for this and Agree on terms and agreements
+
+![Screenshot 2024-02-02 at 7 52 05 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/fff5adcf-883f-4aef-ad8d-4aa84b5c145a)
+
+Next we will select Stand Alone option
+
+![Screenshot 2024-02-02 at 7 53 24 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/8c2dc365-f8d0-4ac0-b067-73745be15c3d)
+
+For network setting we will select standard option to connect online, Air gap means no connection to the internet
+
+![Screenshot 2024-02-02 at 7 53 51 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/6bbda60c-4025-4bc3-8c18-379cd8599966)
+
+Designate the hostname for employing Security Onion.
+
+![Screenshot 2024-02-02 at 7 55 37 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/c22bc509-ad51-4674-b2ff-c5651cb25074)
+
+In our lab environment, we'll maintain the Security Onion setup as it is. However, in a production environment, I would alter the hostname to prevent potential conflicts.
+
+![Screenshot 2024-02-02 at 7 55 58 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/9699b190-cee3-42c4-b438-08e99a6fa5a0)
+
+After selecting our network interface I highly recommend to set up a static IP address 
+
+![Screenshot 2024-02-02 at 8 01 52 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/19dddf7c-7caa-424e-a452-52881f2d5d3a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
