@@ -223,6 +223,40 @@ If we were to revisit our five questions - who, what, when, where, and why - we 
 
 If we were to escalate this to the client, we aim to provide them with as much information as possible. Therefore, the next step is to attempt to determine the hostname for this specific device, as well as the associated username. This additional information enables the client to quickly identify familiar usernames or computer names, facilitating swift remediation efforts. In terms of scope, we also want to explore who else connected out to this IP. While we have only imported one pcap, resulting in seeing only one source IP connecting out, it's a good practice to copy the destination IP and paste it into the query. This allows us to examine what other IPs have connected to this particular IP, helping us to identify the scope of potential infected machines.
 
+![Screenshot 2024-02-06 at 12 56 28 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/de4b64d8-82e9-496c-8c9e-76372f31d17d)
+
+Now, how can we find the hostname or username? If you recall, we did observe some additional logs from Zeek that Zeek had successfully parsed out, and one of them was Kerberos. Kerberos logs usually contain the hostname and username. So, at the top, let's simply type in "kerberos." We'll scroll down and take a look. On the right, we notice a hostname, which is perfect. Now, how do we know it's the source? Well, in Kerberos logs, the client is typically the source, while the server is the destination.
+
+![Screenshot 2024-02-06 at 1 06 28 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/0ce136cf-8568-4447-8e44-e231c3498a7d)
+![Screenshot 2024-02-06 at 1 07 31 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/b2257937-d7b1-431e-a1a6-d8b2be2fa277)
+
+Now, we need to ascertain the username. We can type in "username" and check if there are any fields containing a username. It appears that there's one field using the SMB protocol on Port 445. We'll scroll down and examine the message, which contains the raw log. If we scroll over, we'll see that the username is "Steve Smith" and the hostname matches what we've seen earlier. Perfect, now we have both the hostname and username. With this additional information regarding the signature, we can return to our cases and begin updating them. 
+
+![Screenshot 2024-02-06 at 1 11 15 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/0f889da8-620e-4108-80ee-b97ed804e582)
+![Screenshot 2024-02-06 at 1 16 11 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/e04229c2-6bc4-400c-aa31-4321a507e9da)
+
+For example, we can choose the attachments and extract the files from the pcap to include here. Moreover, we could incorporate observables like the hash. This allows other analysts to refer to a similar ticket by inserting the hash of the malware itself.
+
+![Screenshot 2024-02-06 at 1 18 36 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/a8021a01-e480-4c31-b6e1-5a8a52bfe26d)
+![Screenshot 2024-02-06 at 1 19 17 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/5dac2cd3-80a8-49a7-a129-819d4a88d679)
+
+We possess adequate information to escalate to the client. Here's what my escalation would entail:
+
+On January 7th at 16:07:32 UTC, the asset with IP address 192.168.1.26, belonging to Steve Smith, was observed reaching outbound to a suspicious IP, 256.57.108, known for nefarious purposes. Upon further investigation, it is highly probable that the asset is infected with the malware Arkei/Oski Stealer, which is notorious for stealing passwords. Exfiltration was observed, likely containing passwords and web browser data. The last observed occurrence was on January 7th, 2022, at 16:07:35 UTC. We have thoroughly searched across the environment and confirmed that this was the only asset that reached out.
+
+Recommendations:
+
+Take immediate steps to contain this asset to prevent further unauthorized activities. Considering the likelihood of password exfiltration, enforce a password reset for the user Steve Smith and ensure the implementation of multifactor authentication. Consider conducting a forensic analysis to precisely determine the extent of the incident and identify any additional data exfiltrated. If warranted, re-image the asset, although IPS are regularly cycled. Due to the reported malicious nature of the IP, consider adding it to a rolling blocklist.
+
+Following the escalation, update the case with a note indicating "escalated to the client." Optionally, attach the email or ticket number to the attachment tab. Click on "ADD" to include a comment.
+
+![Screenshot 2024-02-06 at 1 35 18 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/9b63fb21-58a4-45d4-b526-994d42abf3c5)
+
+
+
+
+
+
 
 
 
