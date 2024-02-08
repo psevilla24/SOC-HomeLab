@@ -200,6 +200,38 @@ At the bottom, we have the rule which details how the rule is created. This post
 
 ![Screenshot 2024-02-06 at 12 09 54 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/b61c0cea-a4e6-4d21-ac30-8394967d1dd7)
 
+At the very bottom, we have a signature triggered for a suspicious zipped file name and outbound post request. Whenever we encounter an outbound post request, especially involving a zipped file name, it's reasonable to assume that something has been exfiltrated, particularly considering the earlier observation of unusual activity directed towards this destination IP.
+
+![Screenshot 2024-02-06 at 12 13 55 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/2a521aae-1ccd-4142-a1e3-a4ab32f6eddb)
+
+Moving to the pcap, open Wireshark to analyze it. To do so, head over to their site wireshark.org, click on "Get Started," and select the operating system installer you need. Once Wireshark is installed, open the pcap file you downloaded. If you recall, we noticed an HTTP post request containing a zipped file, which is what I'm most interested in. I'll set up a request filter specifically for any post requests using the filter "HTTP.request.method == POST." Now, we can see a couple of post requests, and at the bottom, there's one with a zip file indicated in brackets. Right-click on it and select "Follow TCP Stream." From here, we can see the client-server communication. Scrolling to the bottom, we can pinpoint the exact time when that post request for the zipped file occurred. The file name was "underscore_586d.zip," and in plain text, we see "autofill Google Chrome default, Microsoft Edge." This suggests that this stealer is targeting browser data, including stored passwords. Additionally, we can conduct OSINT on these stealers to understand their capabilities and objectives further. We see references to "passwords.txt," "Outlook," and a screenshot as well.
+
+![Screenshot 2024-02-06 at 12 20 25 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/e5b92a19-2187-4c19-b97d-4727b21be12c)
+![Screenshot 2024-02-06 at 12 21 00 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/c7b81d14-05dd-46cf-9dc6-83780e2d85cf)
+![Screenshot 2024-02-06 at 12 23 55 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/39ab80be-27d0-42d1-8cf8-b2e07aeb475e)
+![Screenshot 2024-02-06 at 12 30 43 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/e05e4aaf-9096-4867-8f71-8e3b7826179e)
+![Screenshot 2024-02-06 at 12 31 52 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/12a5ae09-eaec-4fc5-b127-d41c81b212c8)
+
+Now we have a clearer understanding of the stealer's objective, and we have compelling evidence regarding what was being exfiltrated. Given the file name "passwords.txt," it's highly probable that passwords were indeed exfiltrated.
+
+![Screenshot 2024-02-06 at 12 36 03 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/209b6191-6317-4523-9fd4-1b5311287c12)
+
+If we were to revisit our five questions - who, what, when, where, and why - we could begin by addressing the "who." In this case, the "who" refers to the computer with the IP address 192.168.1.2. The "what" is that a PC was infected with malware associated with a stealer known for stealing passwords, indicating exfiltration. This event occurred on January 7th at 4:07 p.m. Considering the time zone of -5 (Eastern Time), it's essential to convert it to UTC time. The first occurrence happened on January 7th, 2022, at 16:07:32 UTC, while the last observed activity towards the suspicious IP was on January 7th, 2022, at 16:07:35 UTC. As for the "where," it took place within the 192.168.1.0/24 network. However, regarding the "why," we are unable to ascertain the exact reason due to limitations in logs. My theory is that a user either downloaded this malware through a drive-by download or it was acquired via a successful phishing attempt.
+
+![Screenshot 2024-02-06 at 12 41 35 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/aa23f065-5c0d-440f-9f3c-08a1f4c9ec0f)
+![Screenshot 2024-02-06 at 12 43 36 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/81b1f8ac-1caa-4346-9622-f905dace715e)
+
+If we were to escalate this to the client, we aim to provide them with as much information as possible. Therefore, the next step is to attempt to determine the hostname for this specific device, as well as the associated username. This additional information enables the client to quickly identify familiar usernames or computer names, facilitating swift remediation efforts. In terms of scope, we also want to explore who else connected out to this IP. While we have only imported one pcap, resulting in seeing only one source IP connecting out, it's a good practice to copy the destination IP and paste it into the query. This allows us to examine what other IPs have connected to this particular IP, helping us to identify the scope of potential infected machines.
+
+
+
+
+
+
+
+
+
+
 
 
 
