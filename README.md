@@ -21,7 +21,6 @@ The goal of the SOC HomeLab project was to create a controlled setting for simul
 - Telemetry generation tools to create realistic network traffic and attack scenarios.
 
 ## Steps
-drag & drop screenshots here or use imgur and reference them using imgsrc
 Download and set up virtual box 
 ![Screenshot 2024-02-07 at 1 09 11 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/ce2ce583-7101-4710-ade6-ae3354e84ac3)
 
@@ -190,6 +189,7 @@ Upon simply searching the community ID, it provided me with a variety of rule na
 This website contains a wealth of information about file signatures, also known as file headers. File headers constitute the makeup of a file. When you download something that claims to be a PNG file, you examine the file header to determine whether it truly is a PNG file. For instance, if you were to open a PNG file in a hex editor, you would expect to see specific bytes. If these bytes match, you can confidently identify it as a PNG file. Now, if I search for the following header, the MZ header, you'll find that the beginning bytes are 4D 5A. What types of files have this file signature or file header? Some of them include .d, .drv, .exe, and many more. This is why I mentioned that when you're analyzing the signature, it's likely that either an executable or a DLL file was downloaded, as it mentioned "MZ".
 
 ![Screenshot 2024-02-05 at 7 06 12 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/ba3b73ce-fe07-4fa8-94b1-874a4086d3f5)
+![Screenshot 2024-02-05 at 7 11 11 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/72e91089-2b04-46a8-a456-1540204cc1fe)
 ![Screenshot 2024-02-05 at 7 08 21 PM](https://github.com/psevilla24/SOC-HomeLab/assets/86266429/4022a6d2-2585-411c-a3c0-4bf077850424)
 
 Returning to our Security Onion, we can expand the signature to gather additional information. Now, if you scroll down, you'll notice that it begins with an MZ header. However, if we examine the content type, it indicates that it's an image/jpeg. But that's not accurate. As you recall from the site listing file signatures, if it were indeed a JPEG file, we would expect to see a different header. Instead, going back to our Security Onion, we observe the MZ header, indicating that it's likely not a JPEG file but rather an executable file.
